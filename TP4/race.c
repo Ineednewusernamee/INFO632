@@ -1,4 +1,3 @@
-// race.c
 #include "race.h"
 #include <pthread.h>
 #include <stdio.h>
@@ -12,14 +11,14 @@ Voiture* voitures;
 pthread_barrier_t startBarrier;
 pthread_mutex_t mutex;
 
-static int current_position = 1; // Variable globale pour suivre la position actuelle
+static int current_position = 1;
 
 void* fonctionVoiture(void* arg) {
     Voiture* voiture = (Voiture*) arg;
     pthread_barrier_wait(&startBarrier);
 
     for (int i = 0; i < NB_TOURS; i++) {
-        sleep(rand() % 3 + 1);  // Simuler le temps pour compléter un tour
+        sleep(rand() % 3 + 1);  
         pthread_mutex_lock(&mutex);
         voiture->nbTours++;
         printf("Voiture %d a complété le tour %d\n", voiture->id, voiture->nbTours);
